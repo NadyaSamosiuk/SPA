@@ -1,14 +1,22 @@
 class Nav {
+    constructor(){
+        this.data = JSON.parse(localStorage.getItem('spadata'))
+    }
+    
+
     create (){
         this.element = document.createElement('nav')
         this.element.classList.add('nav')
 
+        this.list=''
+
+        this.data.forEach(item =>{
+            this.list +=`<li><a href="#${item.slug}">${item.shortTitle}</a></li>`
+        })
+
         this.element.innerHTML=`
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="#">Catalog</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contacts</a></li>
+            ${this.list}
         </ul>`
         
         return this.element

@@ -8,9 +8,9 @@ class Header {
             <div class = "container">
                 <div class = "header__logo">
                     <a href="/">
-                        <img src="../image/1.png">
+                        <img src="../image/9.png">
 
-                        <p>GameStore</p>
+                        <p>AllLike</p>
                     </a>
                 </div>
                 ${nav.outerHTML}
