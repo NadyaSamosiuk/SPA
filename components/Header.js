@@ -6,14 +6,15 @@ class Header {
 
         this.element.innerHTML=`
             <div class = "container">
-                <div class = "header__logo">
-                    <a href="/">
-                        <img src="../image/9.png">
-
-                        <p>AllLike</p>
-                    </a>
+                <div class="header__content">
+                    <div class = "header__logo">
+                        <a href="/#home" class="logo__link">
+                            <img src="../image/label.png">
+                            <span>AllLike</span>
+                        </a>
+                    </div>
+                    ${nav.outerHTML}
                 </div>
-                ${nav.outerHTML}
             </div>`
 
         return this.element

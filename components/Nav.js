@@ -11,8 +11,10 @@ class Nav {
         this.list=''
 
         this.data.forEach(item =>{
-            this.list +=`<li><a href="#${item.slug}">${item.shortTitle}</a></li>`
+            this.list +=`<li><a class="${item.slug}_link" href="#${item.slug}">${item.shortTitle}</a></li>`
+            console.log(item.slug)
         })
+
 
         this.element.innerHTML=`
         <ul>

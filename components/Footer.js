@@ -5,7 +5,20 @@ class Footer {
 
         this.element.innerHTML=`
             <div class = "container">
-                <p>Footer text</p>
+                <div class="footer__content">
+                    <div class = "footer__logo">
+                        <a href="/#home" class="logo__link2">
+                            <img src="../image/label2.png">
+
+                            <span>AllLike</span>
+                        </a>
+                    </div>
+                    <div class ="footer__contacts">
+                        <span class="footer__span">Tel.: (800) 927-7671</span><br>
+                        <span class="footer__span">Email: cs@alllike.com </span>      
+                    </div>
+                </div>
+                <div class="footer__copyright"><span>© 2009–2021 alllike.com or its affiliates</span></div>
             </div>`
 
         return this.element
