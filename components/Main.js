@@ -1,6 +1,7 @@
 class Main {
     constructor(){
         this.data = JSON.parse(localStorage.getItem('spadata'))
+        this.basket = JSON.parse(localStorage.getItem('basket')) || []
     }
     create (){
         this.element = document.createElement('main')
@@ -35,14 +36,30 @@ class Main {
                    import('./Products.js')
                     .then(productsData => {
                        productsData.default.init().then((moduleProduct)=>{
-                           this.element.appendChild(moduleProduct)
-                           
+                        this.products = JSON.parse(localStorage.getItem('productData'))  
+                        this.element.appendChild(moduleProduct)
+
+                           let btnsAdd=document.querySelectorAll('.product__btn')
+                           btnsAdd.forEach((btnAdd)=>{
+                               btnAdd.addEventListener('click', (event)=>{
+                                this.addProduct(event.target.id)
+                               })
+                           })
+
+
                            let btn = document.querySelector('#prev')
                            if(btn){
                                btn.addEventListener('click', ()=>{
                                    location.hash = 'catalog'
                                })
                            }
+
+                           let btnsAddDescription=document.querySelectorAll('.description__btn')
+                           btnsAddDescription.forEach((btnAdd)=>{
+                               btnAdd.addEventListener('click', (event)=>{
+                                this.addProduct(event.target.id)
+                               })
+                           })
 
                            console.log(this.data)
                        })
@@ -86,14 +103,81 @@ class Main {
         }
 
         if(hash=='cart'){
-            this.element.classList.add('cart')
-            this.element.innerHTML+=`<div class="container">
-                                        <div class="cart_items"></div>                                  
-                                    </div>`           
-        }else{
-            this.element.classList.remove('cart')
-        }
+            import('./Cart.js').then((cart)=>{
+                this.cart = cart.default.init()
+                console.log(this.cart )
+                this.element.appendChild(this.cart)
 
+               
+                let countMinus=document.querySelectorAll('.count__minus')
+                console.log(countMinus)
+                countMinus.forEach((btnMinus)=>{
+                    btnMinus.addEventListener('click', (event)=>{
+                        this.minusProduct(event.target.id)
+                    })
+                }) 
+                
+                let countPlus=document.querySelectorAll('.count__plus')
+                countPlus.forEach((btnPluss)=>{
+                    btnPluss.addEventListener('click', (event)=>{
+                        this.plusProduct(event.target.id)
+                    })
+                })
+
+            })            
+        }
+    }
+
+    //!!!!!!!!!!!!!!!!!!!!!!!!!
+    plusProduct(id){        
+        this.basket.forEach((item)=>{
+            if(item.id == id){
+                item.count += 1;  
+                localStorage.setItem('basket', JSON.stringify(this.basket))                 
+            }
+        })
+
+    }
+
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!
+    minusProduct(id){
+
+
+        this.basket.forEach((item)=>{
+            if(item.id == id){
+
+                //if(item.count <= 0)
+                                
+                item.count -= 1;  
+                localStorage.setItem('basket', JSON.stringify(this.basket)) 
+
+            }
+        })
+    }
+
+    addProduct(id){
+        let idProduct = id - 1 
+        let  productToCart =  this.products[idProduct]
+        if(this.basket.length == 0){
+            productToCart.count = 1;
+            this.basket.push(this.products[idProduct])
+            localStorage.setItem('basket', JSON.stringify(this.basket))
+        }else if(this.basket.length > 0) {
+            let flag = true
+            this.basket.forEach((item)=>{
+                if(item.id == id){
+                    item.count += 1;  
+                    localStorage.setItem('basket', JSON.stringify(this.basket))
+                    flag = false                  
+                }
+            })
+
+            if(flag){
+                productToCart.count = 1;
+                this.basket.push(this.products[idProduct])
+                localStorage.setItem('basket', JSON.stringify(this.basket))
+            }
+        }
     }
 
     init(){

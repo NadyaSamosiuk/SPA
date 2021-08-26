@@ -62,6 +62,8 @@ function Products () {
             <div class = "description__title">${product[0].title}</div> 
             <div class="description__img"><img  src="${product[0].image}"></div>
             <p class="description__subtitle">${product[0].description}</p>
+            <div class = "product__price description__price">${product[0].price} $</div>
+            <div class ="description__btn"><button id=${product[0].id}></button></div>
         </div>
         `
         document.title=`${product[0].title}` 
