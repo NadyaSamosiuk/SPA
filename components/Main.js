@@ -107,52 +107,8 @@ class Main {
                 this.cart = cart.default.init()
                 console.log(this.cart )
                 this.element.appendChild(this.cart)
-
-               
-                let countMinus=document.querySelectorAll('.count__minus')
-                console.log(countMinus)
-                countMinus.forEach((btnMinus)=>{
-                    btnMinus.addEventListener('click', (event)=>{
-                        this.minusProduct(event.target.id)
-                    })
-                }) 
-                
-                let countPlus=document.querySelectorAll('.count__plus')
-                countPlus.forEach((btnPluss)=>{
-                    btnPluss.addEventListener('click', (event)=>{
-                        this.plusProduct(event.target.id)
-                    })
-                })
-
             })            
         }
-    }
-
-    //!!!!!!!!!!!!!!!!!!!!!!!!!
-    plusProduct(id){        
-        this.basket.forEach((item)=>{
-            if(item.id == id){
-                item.count += 1;  
-                localStorage.setItem('basket', JSON.stringify(this.basket))                 
-            }
-        })
-
-    }
-
-    //!!!!!!!!!!!!!!!!!!!!!!!!!!
-    minusProduct(id){
-
-
-        this.basket.forEach((item)=>{
-            if(item.id == id){
-
-                //if(item.count <= 0)
-                                
-                item.count -= 1;  
-                localStorage.setItem('basket', JSON.stringify(this.basket)) 
-
-            }
-        })
     }
 
     addProduct(id){
